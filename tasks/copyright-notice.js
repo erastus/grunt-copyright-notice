@@ -93,7 +93,7 @@ module.exports = function (grunt) {
 
             var ext = path.extname(destFile);
 
-            if (ext === '.js') {
+            if (ext === '.js' || ext === '.sass') {
                 res = that.generateTag(destFile);
             } else if (ext === '.html') {
                 that.validateTemplateTags(destFile, fileContents);
@@ -138,7 +138,7 @@ module.exports = function (grunt) {
         var fileContents = grunt.file.read(relativePath);
         var replacing_previous = false;
 
-        if (ext === '.js') {
+        if (ext === '.js' || ext === '.sass') {
             var insertPositionMarker_re = new RegExp(insertPositionMarker, 'g');
             fileContents = this.defaultOldBannerRemover(fileContents, this.options.notice, insertPositionMarker);
 
@@ -211,7 +211,7 @@ module.exports = function (grunt) {
     //
     // register tags grunt task
     //
-    grunt.registerMultiTask('copyright-notice', 'Dynamically add copyright notice to your js, html files', function () {
+    grunt.registerMultiTask('copyright-notice', 'Dynamically add copyright notice to your js, sass, html files', function () {
         var that = this;
         var tags = new Tags(that.options());
 
